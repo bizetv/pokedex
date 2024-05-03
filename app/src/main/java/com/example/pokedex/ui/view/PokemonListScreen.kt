@@ -40,7 +40,7 @@ fun PokemonListScreen(
     pokemonListViewModel: PokemonListViewModel = viewModel()
 ) {
     val pokemonList by pokemonListViewModel.pokemonList.observeAsState(null)
-    //val pokemonListFlow by pokemonListViewModel.pokemonListFlow.collectAsStateWithLifecycle()
+
     LaunchedEffect(Unit) {
         pokemonListViewModel.fetchPokemonList(0)
     }
@@ -85,8 +85,6 @@ fun PokemonGrid(
             .height(120.dp)
             .clickable { onPokemonClicked(id) },
     ) {
-
-
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png")
@@ -109,10 +107,8 @@ fun PokemonGrid(
 @Preview
 @Composable
 fun PokemonGridPreview() {
-
     PokemonGrid(
         result = Result("PIKACHU", "http://google.com/pikachu"),
         onPokemonClicked = {}
     )
-
 }

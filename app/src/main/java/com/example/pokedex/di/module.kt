@@ -14,16 +14,16 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class  NetworkModule {
+class NetworkModule {
 
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
-        val interceptor : HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
+        val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.NONE
         }
 
-        return  OkHttpClient.Builder().apply {
+        return OkHttpClient.Builder().apply {
             addInterceptor(interceptor)
         }.build()
     }
@@ -32,7 +32,7 @@ class  NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         val BASE_URL = "https://pokeapi.co/api/v2/"
-        return         Retrofit.Builder()
+        return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)

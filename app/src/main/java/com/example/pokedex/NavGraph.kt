@@ -21,18 +21,19 @@ object Destinations {
 
 @Composable
 fun NavGraph(
-    navController: NavHostController = rememberNavController())
-{
+    navController: NavHostController = rememberNavController()
+) {
     NavHost(navController = navController, startDestination = POKEMON_LIST) {
         composable(POKEMON_LIST) {
             val pokemonListViewModel = hiltViewModel<PokemonListViewModel>()
 
-            PokemonListScreen(onPokemonClicked = { id: String ->
-                navController.navigate("pokemonDetail/$id")
-            }, pokemonListViewModel
+            PokemonListScreen(
+                onPokemonClicked = { id: String ->
+                    navController.navigate("pokemonDetail/$id")
+                }, pokemonListViewModel
             )
         }
-        composable(POKEMON_DETAIL){
+        composable(POKEMON_DETAIL) {
             val id = it.arguments?.getString("id")
             val pokemonDetailViewModel = hiltViewModel<PokemonDetailViewModel>()
 
